@@ -1,0 +1,42 @@
+.car-form{
+    display: grid;
+    width: 100%;
+    min-width: 600px;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    gap: 20px;
+}
+
+.input-box {
+    color: gray;
+    display: grid;
+    width: 100%;
+    grid-gap: 10px;
+    align-items: center;
+}
+
+.input-box input {
+    color: inherit;
+    font-weight: 600;
+    padding: 13px;
+    border: 2px solid #222;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1em;
+    width: 100%;
+}
+
+.range-input-box {
+    width: 100%;
+    display: grid;
+    align-items: center;
+}
+
+.range-input-box label {
+    color: gray;
+    font-size: 1em;
+    align-self: start;
+}
+
+.span-column {
+    grid-column: 1/-1;
+}

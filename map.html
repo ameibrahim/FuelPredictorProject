@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="main.css?4">
+    <link rel="stylesheet" href="dashboard.css?3">
+    <link rel="stylesheet" href="spinkit.css?1">
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+
+</head>
+<body>
+
+    <!-- <div class="map-view"> -->
+        <!-- <div class="search-area">
+            <input type="text" oninput="giveSuggestions(this.value)" placeholder="type for suggestions">
+
+            <div class="suggestions">
+
+            </div>
+        </div> -->
+
+        <div id='map'>
+        </div>
+    <!-- </div> -->
+
+    <style>
+
+        .map-view {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100vw;
+            border: 1px solid red;
+        }
+
+    </style>
+
+
+    <script>
+        let newID = crypto.randomUUID();
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaWJyYWhpbWFtZTEzIiwiYSI6ImNsb2xlaDUxbDJlcXYya3A5bzZoZWc5MzkifQ.YyKfquv1mvX7xrUj5oG1Ow';
+
+        const map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/streets-v12', // style URL
+            center: [33.321258,35.212448], // starting position [lng, lat]
+            zoom: 9, // starting zoom
+        });
+    </script>
+    
+</body>
+</html>

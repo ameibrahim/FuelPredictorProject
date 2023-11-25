@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/popup.css">
+    <link rel="stylesheet" href="assets/css/inputs.css">
+    <link rel="stylesheet" href="assets/css/range.css">
+    <link rel="stylesheet" href="assets/css/dropdown.css">
+    <link rel="stylesheet" href="assets/css/spinkit.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+
+
+    <script src="assets/js/range.js" defer></script>
+    <script src="assets/js/dropdown.js" defer></script>
+</head>
+<body>
+
+    <style>
+        .car-overlay {
+            display: grid;
+        }
+    </style>
+
+    <div class="overlay car-overlay">
+        <div class="popup">
+            <div class="popup-header">
+                <div class="close-button" onclick="hideAddTaskForm()">
+                    <img src="assets/icons/close.png" alt="">
+                </div>
+                <h1 class="pop-up-title">Add A Car</h1> 
+            </div>
+
+            <div class="popup-body">
+
+                <div class="car-form">
+                    <div class="input-box">
+                        <label for="">Car Name</label>
+                        <input type="text">
+                    </div>
+
+                    <div class="input-box">
+                        <label for="">Vehicle Class</label>
+                        <div class="dropdown" data-value="Select A Model" data-empty="true">
+                            <ul class="values">
+                                <li>Mercedes</li>
+                                <li>Corrola</li>
+                                <li>Meow</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="range-input-box span-column">
+                        <label for="">Engine Size</label>
+                        <div class='range' onchange="bindValue(this)">
+                            <input type="range" min='0' max='10' step='0.1' value="0" />
+                            <span>0</span>
+                        </div>
+                    </div>
+
+                    <div class="range-input-box">
+                        <label for="">Cylinders</label>
+                        <div class='range' onchange="bindValue(this)">
+                            <input type="range" min='0' max='16' step='1' value="0" />
+                            <span>0</span>
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="">Transmission</label>
+                        <div class="dropdown" data-value="Choose Transmission Type" data-empty="true">
+                            <ul class="values">
+                                <li>AM</li>
+                                <li>AV</li>
+                                <li>AS</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="range-input-box">
+                        <label for="">CO2 Rating</label>
+                        <div class='range' onchange="bindValue(this)">
+                            <input type="range" min='0' max='16' step='0.1' value="0" />
+                            <span>0</span>
+                        </div>
+                    </div>
+
+                    <div class="input-box">
+                        <label for="">Fuel Type</label>
+                        <div class="dropdown" data-value="Choose Fuel Type" data-empty="true">
+                            <ul class="values">
+                                <li>D</li>
+                                <li>E</li>
+                                <li>X</li>
+                                <li>Z</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="popup-footer">
+                <div class="button" onclick="addCar(this)">
+                    <p>Add Car</p>
+                    <div class="sk-wave button-loader">
+                        <div class="sk-wave-rect"></div>
+                        <div class="sk-wave-rect"></div>
+                        <div class="sk-wave-rect"></div>
+                        <div class="sk-wave-rect"></div>
+                        <div class="sk-wave-rect"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <script>
+
+        let carOverlay = document.querySelector(".car-overlay");
+
+
+        function addCar(element){
+            let text = element.querySelector("p");
+            let loader = element.querySelector(".button-loader");
+
+            text.style.display = "none";
+            loader.style.display = "flex";
+
+            // getCarDetails();
+            // sendCarDetails();
+
+            setTimeout(() => {
+                text.style.display = "none";
+                loader.style.display = "flex";
+                closeAddCarOverlay();
+                // refreshDashboard();
+            }, 3000);
+        }
+
+        function closeAddCarOverlay(){
+            carOverlay.style.display = "none";
+        }
+
+
+    </script>
+    
+</body>
+</html>

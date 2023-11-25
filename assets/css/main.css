@@ -1,0 +1,175 @@
+*,
+*::after,
+*::before {
+    margin: 0 0;
+    padding: 0 0;
+    box-sizing: border-box;
+    font-family: Avenir Next;
+    list-style: none;
+}
+
+:root{
+    --background: #FAFAFA;
+    --accent: #5408b1;
+    --faint: #FAF6EE;
+}
+
+body {
+    display: grid;
+    /* grid-template-columns: 1fr 500px; */
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.image-view {
+    position: absolute;
+    display: grid;
+    /* border: 10px solid red; */
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    left: 0px;
+    transition: 1s;
+}
+
+.image-view > img {
+    position: absolute;
+    /* border: 5px solid blue; */
+    object-fit: fill;
+    width: calc(100vw - 500px);
+    bottom: -100px;
+}
+
+.user-credentials-view {
+    display: grid;
+    background: #FAFAFA;
+    padding: 50px;
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 50px;
+    box-shadow: 0px 0px 200px var(--accent);
+    z-index: 1;
+
+    position: absolute;
+    width: 500px;
+    height: 100vh;
+    top: 0px;
+    left: calc(100vw - 500px);
+    transition: 1s;
+}
+
+.logo{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.logo > img {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.user-actions {
+    display: none;
+    grid-template-columns: auto auto;
+    grid-gap: 20px;
+    align-self: start;
+}
+
+.username {
+    color: black;
+    font-weight: 400;
+    font-size: 1.3em;
+}
+
+.logout-icon {
+    height: 1.3em;
+    cursor: pointer;
+    align-self: center;
+}
+
+.logout-icon > img {
+    height: inherit;
+}
+
+.container {
+    display: grid;
+    align-self: center;
+    grid-template-rows: auto auto auto;
+    grid-gap: 20px;
+}
+
+.login-container{
+    transition: 1s;
+}
+
+.button {
+    background-color: #222;
+    color: white;
+    font-weight: 400;
+    padding: 0.7em 2.3em;
+    border-radius: 30px;
+    cursor: pointer;
+    align-self: center;
+}
+.container .button { place-self: end; }
+
+.heading {
+    display: grid;
+    grid-gap: 10px;
+}
+
+.inner-container {
+    display: grid;
+    border: 1px solid gainsboro;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.inner-container > input {
+    background: white;
+    padding: 1em;
+    border: none;
+    border-bottom: 1px solid gainsboro;
+    outline: none;
+    color: gray;
+    font-weight: 600;
+    font-size: 1em;
+}
+
+.inner-container > input:last-child {
+    border: none;
+}
+
+.form-area {
+    display: grid;
+    grid-gap: 10px;
+}
+
+.sign-up-link {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-gap: 5px;
+}
+
+.sign-up-link > p:nth-child(2) {
+    color: var(--accent);
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 1s;
+}
+
+.sign-up-link > p:nth-child(2):hover {
+    opacity: 0.5;
+}
+
+
+.signup-container{
+    display: none;
+}
+
+.copyright-section{
+    justify-self: center;
+}

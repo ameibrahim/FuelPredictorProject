@@ -1,0 +1,83 @@
+#map {
+    height: 100vh;
+}
+
+.map-view-container {
+    width: 100vw;
+    height: 100vh;
+    background: red;
+    position: absolute;
+    z-index: 2;
+    left: 100vw;
+    transition: 1s;
+    display: grid;
+
+    grid-template-columns: 1fr 500px;
+}
+
+.back-arrow-container {
+    position: absolute;
+    top: 10px;
+    left: 25px;
+    width: 50px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.back-arrow-container > img {
+    width: inherit;
+}
+
+.map-view{
+    background: green;
+    display: grid;
+    height: 100%;
+    position: relative;
+}
+
+.search-area{
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    justify-items: center;
+    align-items: start;
+    position: absolute;
+    top: 20px;
+    z-index: 10 !important;
+}
+
+.search-area > input {
+    padding: 13px;
+    font-size: 16px;
+    outline: none;
+    border: 2px solid #49c1c1;
+    border-radius: 10px;
+    width: 250px;
+}
+
+.search-area > .suggestions {
+    position: absolute;
+    border: 1px solid black;
+    top: 100%;
+    border: 2px solid #49c1c1;
+    background: white;
+    z-index: 10;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.suggestions > * {
+    padding: 13px;
+    border-bottom: 2px solid #49c1c1;
+    cursor: pointer;
+}
+
+.suggestions > *:last-child {
+    border-bottom: none;
+}
+
+.prediction-details-container {
+    background: white;
+}
+
+

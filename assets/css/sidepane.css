@@ -1,0 +1,147 @@
+.right-weight-grid{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 20px;
+}
+
+.centered-grid {
+    display: grid;
+    justify-items: center;
+}
+
+.details-pane {
+    background: white;
+    height: 100vh;
+    width: 500px;
+    padding: 50px;
+    display: grid;
+    grid-gap: 30px;
+    align-items: start;
+    grid-template-rows: auto auto auto 1fr;
+}
+
+.details-pane > * {
+    display: grid;
+    grid-gap: 20px;
+}
+
+.details-pane h1 {
+    font-weight: 400;
+    font-size: 2.5em;
+    color: var(--accent);
+}
+
+.details-pane h3 {
+    font-weight: 400;
+    color: var(--accent);
+    position: relative;
+    justify-self: start;
+}
+
+.details-pane h3::before{
+    content: "";
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    border-radius: 5px;
+    background: var(--accent);
+}
+
+.packed-list {
+    display: grid;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.packed-list > * {
+    padding: 10px 20px;
+    color: white;
+    background: var(--accent);
+    border-bottom: 1px solid white;
+}
+
+.route-index-marks {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: grid;
+    padding: 10px 0px;
+}
+
+.route-index-marks > span {
+    display: block;
+    height: 20px;
+    width: 20px;
+    background: var(--accent);
+    border-radius: 50%;
+}.route-index-marks > span:last-child{ align-self: end; }
+
+.route-index-marks > span::before {
+    content: "";
+    position: absolute;
+    /* display: block; */
+    height: 12px;
+    width: 12px;
+    background: white;
+    border-radius: 50%;
+    left: calc(50% - 6px);
+    top: calc(14px);
+    z-index: 1;
+} 
+
+.route-index-marks > span:first-child:after {
+    content: "";
+    position: absolute;
+    height: calc(100% - 20px);
+    background: var(--accent);
+    width: 3px;
+    left: calc(50% - 1.5px);
+    z-index: 0;
+}
+
+.border-box, .colored-box {
+    color: var(--accent);
+    border-radius: 10px;
+    padding: 7px 30px;
+    position: relative;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 5px;
+    border: 3px solid var(--accent);
+    min-width: 135px;
+}
+
+.border-box > *:first-child, .colored-box > *:first-child {
+    justify-self: end;
+}
+
+.border-box::after, .colored-box::after {
+    content: attr(data-heading);
+    text-transform: uppercase;
+    position: absolute;
+    color: var(--accent);
+    font-size: 0.5em;
+    top: calc(100% + 10px);
+    justify-self: center;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.colored-box {
+    color: white;
+    border: none;
+    background: var(--accent);
+    padding: 10px 30px;
+}
+
+.top-heading::after {
+    top: calc(0% - 20px);
+}
+
+.two-column-grid {
+    padding: 20px;
+    grid-gap: 50px;
+    grid-template-columns: 1fr 1fr;
+}

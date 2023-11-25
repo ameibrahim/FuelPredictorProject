@@ -1,0 +1,59 @@
+.dashboard {
+    height: 100%;
+    width: 100%;
+    max-width: 1000px;
+    display: none;
+    grid-template-rows: auto 1fr;
+    grid-gap: 20px;
+    justify-self: center;
+/* 
+    border: 2px solid green; */
+    overflow: scroll;
+}
+
+.dashboard-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-gap: 20px;
+}
+
+.dashboard-header > h1 {
+    font-weight: 200;
+    font-size: 3em;
+}
+
+.car-list-container {
+    display: grid;
+    align-self: start;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.car-item {
+    background: var(--faint);
+    border-radius: 10px;
+    border: 2px solid black;
+    color: black;
+    display: grid;
+    grid-gap: 20px;
+    place-items: center;
+    min-height: 200px;
+}
+
+.car-item h1 { font-weight: 400; }
+.car-item .button { justify-self: center; }
+
+
+.sk-flow.dashboard-loader {
+    display: none;
+    place-self: center;
+
+    --sk-color: black;
+    --sk-size: 50px;
+}
+
+.sk-wave.button-loader {
+    display: none;
+    --sk-color: #ffffff;
+    --sk-size: 13px;
+}

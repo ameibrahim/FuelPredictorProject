@@ -1,0 +1,2 @@
+INSERT INTO `cars`(`carName`, `vehicleClass`, `engineSize`, `cylinders`, `transmission`, `CO2Rating`, `fuelType`) 
+VALUES ('$carName','$vehicleClass','$engineSize','$cylinders','$transmission','$CO2Rating','$fuelType')
