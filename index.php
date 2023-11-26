@@ -28,8 +28,9 @@
 
     <script src="map.js?2" defer></script>
     <script src="assets/js/dropdown.js?1" defer></script>
-    <script src="assets/js/range.js" defer></script>
-    <script src="index.js?12" defer></script>
+    <script src="assets/js/range.js?1" defer></script>
+    <script src="assets/js/carPredictionAPI.js?5" defer></script>
+    <script src="index.js?14" defer></script>
 
     <?php 
         echo "<script> 

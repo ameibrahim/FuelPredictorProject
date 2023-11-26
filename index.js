@@ -192,13 +192,6 @@ async function login() {
 
 }
 
-function predict(element){
-
-    mapView.style.left = "0vw";
-    viewContainer.style.left = "-100vw";
-
-}
-
 function slideOutMapView(){
     mapView.style.left = "100vw";
     viewContainer.style.left = "0vw";
@@ -235,7 +228,7 @@ async function addCar(element){
 
     setTimeout(() => {
         text.style.display = "none";
-        loader.style.display = "flex";
+        buttonLoader.style.display = "flex";
         closeAddCarOverlay();
         getAvailableCars();
         // refreshDashboard();
@@ -249,9 +242,9 @@ function resetCarForm() {
     vehicleClassInput.setAttribute("data-value", "Select Vehicle Class");
     vehicleClassInput.setAttribute("data-empty", "true");
 
-    engineSizeInput.value = 0;
-    cylindersInput.value = 0;
-    CO2RatingInput.value = 0;
+    resetRangeElement(engineSizeInput);
+    resetRangeElement(cylindersInput);
+    resetRangeElement(CO2RatingInput);
 
     transmissionInput.setAttribute("data-value", "Select Transmission");
     transmissionInput.setAttribute("data-empty", "true");
@@ -341,9 +334,9 @@ async function getAvailableCars(){
         if (cars.length > 0) {
 
             let innerHTML = cars.map( car => 
-                `<div class="car-item" data-id="${car.id}">
+                `<div class="car-item">
                     <h1>${car.carName}</h1>
-                    <div class="button" onclick="predict(this)">Predict</div>
+                    <div class="button" onclick="predictWithID(${car.id})">Predict</div>
                 </div>`
             )
     
@@ -353,6 +346,63 @@ async function getAvailableCars(){
             carListContainer.innerHTML = 
             `<div class="span-all-directions">There are no cars yet, add a new car.</div>`
         }
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function predictWithID(givenID){
+
+    mapView.style.left = "0vw";
+    viewContainer.style.left = "-100vw";
+
+    try{
+        let carArray = await fetchDetailsFor(givenID);
+
+        console.log("carArray: ", carArray[0])
+
+
+        // let carArray = {
+        //     carName: "Mercedes",
+        //     vehicleClass: "Two-seater",
+        //     engineSize: 5,
+        //     cylinders: 6,
+        //     transmission : "AV",
+        //     CO2Rating: 6,
+        //     fuelType: "X"
+        // }
+        
+        let indexesArray = convertToArrayOfIndexes(carArray[0]);
+        console.log("indexesArray: ", indexesArray)
+        let results = await predictWithObject(indexesArray);
+        console.log("results: ", results);
+
+        // Make sure server is on...
+        // setResultsGlobally
+        // <--- Wait for start and destination
+        // <-- displayDetailsOnScreen()
+
+    }
+    catch(error){
+        console.log(error)
+    }
+
+}
+
+async function fetchDetailsFor(givenID){
+
+    let params = `carID=${givenID}`;
+
+    let callObject = {
+        phpFilePath: "include/car.fetch.php",
+        rejectMessage: "car details not fetched",
+        params,
+        type: "fetch",
+    }
+
+    try {
+        return await AJAXCall(callObject);
     }
     catch(error){
         console.log(error);
