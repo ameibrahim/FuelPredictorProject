@@ -17,11 +17,22 @@
 
                 <div class="input-box">
                     <label for="">Vehicle Class</label>
-                    <div class="dropdown" id="vehicle-class-input" data-value="Select A Model" data-empty="true">
+                    <div class="dropdown" id="vehicle-class-input" data-value="Select A Vehicle Class" data-empty="true">
                         <ul class="values">
-                            <li>Mercedes</li>
-                            <li>Corrola</li>
-                            <li>Meow</li>
+                            <li>Two-seater</li>
+                            <li>Minicompact</li>
+                            <li>Compact</li>
+                            <li>Subcompact</li>
+                            <li>Mid-size</li>
+                            <li>Full-size</li>
+                            <li>SUV: Small</li>
+                            <li>SUV: Standard</li>
+                            <li>Minivan</li>
+                            <li>Station wagon: Small</li>
+                            <li>Station wagon: Mid-size</li>
+                            <li>Pickup truck: Small</li>
+                            <li>Special purpose vehicle</li>
+                            <li>Pickup truck: Standard</li>
                         </ul>
                     </div>
                 </div>
@@ -46,9 +57,11 @@
                     <label for="">Transmission</label>
                     <div class="dropdown" id="transmission-input" data-value="Choose Transmission Type" data-empty="true">
                         <ul class="values">
-                            <li>AM</li>
                             <li>AV</li>
+                            <li>AM</li>
+                            <li>M</li>
                             <li>AS</li>
+                            <li>A</li>
                         </ul>
                     </div>
                 </div>
@@ -78,7 +91,7 @@
         </div>
 
         <div class="popup-footer">
-            <div class="button" onclick="addCar(this)">
+            <div class="button add-car-button" onclick="addCar(this)">
                 <p>Add Car</p>
                 <div class="sk-wave button-loader">
                     <div class="sk-wave-rect"></div>

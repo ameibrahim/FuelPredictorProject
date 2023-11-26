@@ -8,14 +8,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Predictor</title>
-    <link rel="stylesheet" href="assets/css/main.css?6">
-    <link rel="stylesheet" href="assets/css/dashboard.css?3">
+    <link rel="stylesheet" href="assets/css/main.css?7">
+    <link rel="stylesheet" href="assets/css/dashboard.css?4">
     <link rel="stylesheet" href="assets/css/sidepane.css?2">
 
     <link rel="stylesheet" href="assets/css/spinkit.css?2">
     <link rel="stylesheet" href="assets/css/mapview.css?2">
     <link rel="stylesheet" href="assets/css/popup.css">
-    <link rel="stylesheet" href="assets/css/dropdown.css">
+    <link rel="stylesheet" href="assets/css/dropdown.css?1">
     <link rel="stylesheet" href="assets/css/range.css">
     <link rel="stylesheet" href="assets/css/inputs.css">
 
@@ -29,11 +29,12 @@
     <script src="map.js?2" defer></script>
     <script src="assets/js/dropdown.js?1" defer></script>
     <script src="assets/js/range.js" defer></script>
-    <script src="index.js?8" defer></script>
+    <script src="index.js?12" defer></script>
 
     <?php 
         echo "<script> 
             const USERNAME = '".$_SESSION['username']."';
+            const userID = '".$_SESSION['id']."';
         </script>";
     ?>
 </head>

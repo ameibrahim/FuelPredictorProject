@@ -7,10 +7,22 @@ let loginContainer = document.querySelector(".login-container")
 let signupContainer = document.querySelector(".signup-container")
 let mapView = document.querySelector(".map-view-container")
 let carOverlay = document.querySelector(".car-overlay");
+let carListContainer = document.querySelector(".car-list-container");
+
+
+let carNameInput = carOverlay.querySelector("#car-name-input");
+let vehicleClassInput = carOverlay.querySelector("#vehicle-class-input");
+let engineSizeInput = carOverlay.querySelector("#engine-size-input");
+let cylindersInput = carOverlay.querySelector("#cylinders-input");
+let transmissionInput = carOverlay.querySelector("#transmission-input");
+let CO2RatingInput = carOverlay.querySelector("#co2-rating-input");
+let fuelTypeInput = carOverlay.querySelector("#fuel-type-input");
 
 if(USERNAME != ""){
     showUsername(USERNAME);
     maximize();
+
+    getAvailableCars();
 }
 
 function AJAXCall(callObject){
@@ -198,14 +210,15 @@ function showAddCarOverlay(){
 
 function closeAddCarOverlay(){
     carOverlay.style.display = "none";
+    resetCarForm();
 }
 
 async function addCar(element){
     let text = element.querySelector("p");
-    let loader = element.querySelector(".button-loader");
+    let buttonLoader = element.querySelector(".button-loader");
 
     text.style.display = "none";
-    loader.style.display = "flex";
+    buttonLoader.style.display = "flex";
 
     let details = getCarDetails();
     
@@ -224,19 +237,37 @@ async function addCar(element){
         text.style.display = "none";
         loader.style.display = "flex";
         closeAddCarOverlay();
+        getAvailableCars();
         // refreshDashboard();
     }, 3000);
 }
 
-function getCarDetails() {
+function resetCarForm() {
 
-    let carNameInput = carOverlay.querySelector("#car-name-input");
-    let vehicleClassInput = carOverlay.querySelector("#vehicle-class-input");
-    let engineSizeInput = carOverlay.querySelector("#engine-size-input");
-    let cylindersInput = carOverlay.querySelector("#cylinders-input");
-    let transmissionInput = carOverlay.querySelector("#transmission-input");
-    let CO2RatingInput = carOverlay.querySelector("#co2-rating-input");
-    let fuelTypeInput = carOverlay.querySelector("#fuel-type-input");
+    carNameInput.value = "";
+    
+    vehicleClassInput.setAttribute("data-value", "Select Vehicle Class");
+    vehicleClassInput.setAttribute("data-empty", "true");
+
+    engineSizeInput.value = 0;
+    cylindersInput.value = 0;
+    CO2RatingInput.value = 0;
+
+    transmissionInput.setAttribute("data-value", "Select Transmission");
+    transmissionInput.setAttribute("data-empty", "true");
+
+    fuelTypeInput.setAttribute("data-value", "Select Fuel Type");
+    fuelTypeInput.setAttribute("data-empty", "true");
+
+    let button = document.querySelector(".add-car-button");
+
+    button.querySelector(".button-loader").style.display = "none";
+    button.querySelector("p").style.display = "block";
+
+
+}
+
+function getCarDetails() {
 
     let carName = carNameInput.value;
     let vehicleClass = vehicleClassInput.getAttribute("data-value");
@@ -274,6 +305,7 @@ async function sendCarDetails(details){
     } = details;
 
     let params = 
+    `userID=${userID}&&`+
     `carName=${carName}&&`+
     `vehicleClass=${vehicleClass}&&`+
     `engineSize=${engineSize}&&`+
@@ -290,4 +322,39 @@ async function sendCarDetails(details){
     }
 
     return await AJAXCall(callObject);
+}
+
+async function getAvailableCars(){
+
+    let params = `userID=${userID}`;
+
+    let callObject = {
+        phpFilePath: "include/cars.fetch.php",
+        rejectMessage: "cars not fetched",
+        params,
+        type: "fetch",
+    }
+
+    try {
+        let cars = await AJAXCall(callObject);
+        
+        if (cars.length > 0) {
+
+            let innerHTML = cars.map( car => 
+                `<div class="car-item" data-id="${car.id}">
+                    <h1>${car.carName}</h1>
+                    <div class="button" onclick="predict(this)">Predict</div>
+                </div>`
+            )
+    
+            carListContainer.innerHTML = innerHTML.join("");
+        }
+        else {
+            carListContainer.innerHTML = 
+            `<div class="span-all-directions">There are no cars yet, add a new car.</div>`
+        }
+    }
+    catch(error){
+        console.log(error);
+    }
 }

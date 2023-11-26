@@ -6,41 +6,5 @@
     </div>
 
     <div class="car-list-container">
-        <div class="car-item">
-            <h1>Mercedes</h1>
-            <div class="button" onclick="predict(this)">Predict</div>
-        </div>
-
-        <div class="car-item">
-            <h1>Mercedes</h1>
-            <div class="button">Predict</div>
-        </div>
-
-        <div class="car-item">
-            <h1>Mercedes</h1>
-            <div class="button">Predict</div>
-        </div>
-
-        <div class="car-item">
-            <h1>Mercedes</h1>
-            <div class="button">Predict</div>
-        </div>
-
-        <div class="car-item">
-            <h1>Mercedes</h1>
-            <div class="button">Predict</div>
-        </div>
-        <div class="car-item">
-            <h1>Mercedes</h1>
-            <div class="button">Predict</div>
-        </div>
-        <div class="car-item">
-            <h1>Mercedes</h1>
-            <div class="button">Predict</div>
-        </div>
-        <div class="car-item">
-            <h1>Mercedes</h1>
-            <div class="button">Predict</div>
-        </div>
     </div>
 </div>
