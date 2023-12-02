@@ -11,12 +11,13 @@
 
 .details-pane {
     background: white;
-    height: 100vh;
+    max-height: 100vh;
     width: 500px;
     padding: 50px;
     display: grid;
     grid-gap: 30px;
     align-items: start;
+    overflow: scroll;
     grid-template-rows: auto auto auto 1fr;
 }
 
@@ -60,6 +61,12 @@
     color: white;
     background: var(--accent);
     border-bottom: 1px solid white;
+}
+
+.packed-list.car-details > div{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 20px;
 }
 
 .route-index-marks {
@@ -145,3 +152,4 @@
     grid-gap: 50px;
     grid-template-columns: 1fr 1fr;
 }
+

@@ -44,31 +44,42 @@
     position: absolute;
     top: 20px;
     z-index: 10 !important;
+    grid-gap: 20px;
 }
 
-.search-area > input {
+.input-box-container {
+    display: grid;
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.input-box-container > input {
     padding: 13px;
     font-size: 16px;
     outline: none;
-    border: 2px solid #49c1c1;
-    border-radius: 10px;
+    border: none;
     width: 250px;
-}
+    color: var(--accent);
+    font-weight: 600;
+    border-bottom: 2px solid var(--accent);
+}.input-box-container > input:last-child{ border-bottom: none ;}
 
-.search-area > .suggestions {
+.search-area .suggestions {
     position: absolute;
-    border: 1px solid black;
-    top: 100%;
-    border: 2px solid #49c1c1;
-    background: white;
+    top: calc(100% - 2.4em - 20px - 15px);
+    background: var(--accent);
     z-index: 10;
     width: 250px;
     border-radius: 10px;
+    color: white;
+    font-weight: 400;
+    display: none;
 }
 
 .suggestions > * {
-    padding: 13px;
-    border-bottom: 2px solid #49c1c1;
+    padding: 8px 13px;
+    border-bottom: 2px solid white;
     cursor: pointer;
 }
 

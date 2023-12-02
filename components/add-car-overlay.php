@@ -48,7 +48,7 @@
                 <div class="range-input-box">
                     <label for="">Cylinders</label>
                     <div class='range' onchange="bindValue(this)">
-                        <input id="cylinders-input" type="range" min='0' max='16' step='1' value="0" />
+                        <input id="cylinders-input" type="range" min='2' max='16' step='1' value="0" />
                         <span>0</span>
                     </div>
                 </div>

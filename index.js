@@ -18,10 +18,11 @@ let transmissionInput = carOverlay.querySelector("#transmission-input");
 let CO2RatingInput = carOverlay.querySelector("#co2-rating-input");
 let fuelTypeInput = carOverlay.querySelector("#fuel-type-input");
 
+let APIResults = { };
+
 if(USERNAME != ""){
     showUsername(USERNAME);
     maximize();
-
     getAvailableCars();
 }
 
@@ -172,6 +173,7 @@ async function login() {
         if( result == "success" ){
             setTimeout(() => {
                 maximize();
+                getAvailableCars();
                 showUsername(username);
                 buttonText.style.display = "block";
                 loginLoader.style.display = "none";
@@ -360,7 +362,7 @@ async function predictWithID(givenID){
     try{
         let carArray = await fetchDetailsFor(givenID);
 
-        console.log("carArray: ", carArray[0])
+        carArray = carArray[0]
 
 
         // let carArray = {
@@ -373,9 +375,10 @@ async function predictWithID(givenID){
         //     fuelType: "X"
         // }
         
-        let indexesArray = convertToArrayOfIndexes(carArray[0]);
+        let indexesArray = convertToArrayOfIndexes(carArray);
         console.log("indexesArray: ", indexesArray)
         let results = await predictWithObject(indexesArray);
+        setSidePaneValues(carArray, results);
         console.log("results: ", results);
 
         // Make sure server is on...
@@ -407,4 +410,36 @@ async function fetchDetailsFor(givenID){
     catch(error){
         console.log(error);
     }
+}
+
+function setSidePaneValues(carArray, results){
+
+        let {
+            carName,
+            vehicleClass,
+            engineSize,
+            cylinders,
+            transmission,
+            CO2Rating,
+            fuelType,
+        } = carArray;
+
+        APIResults = results;
+
+        let carNameBox = document.querySelector(".car-name-box");
+        let carVehicleClassBox = document.querySelector(".car-vehicle-class-box");
+        let carEngineBox = document.querySelector(".car-engine-box");
+        let carCylinderBox = document.querySelector(".car-cylinders-box");
+        let carFuelTypeBox = document.querySelector(".car-fuel-type-box");
+        let carTransmissionBox = document.querySelector(".car-transmission-box");
+        let carCO2RatingBox = document.querySelector(".car-co2-rating-box");
+
+        carNameBox.querySelector("div").textContent = carName;
+        carVehicleClassBox.querySelector("div").textContent = vehicleClass;
+        carEngineBox.querySelector("div").textContent = engineSize;
+        carCylinderBox.querySelector("div").textContent = cylinders;
+        carFuelTypeBox.querySelector("div").textContent = fuelType;
+        carTransmissionBox.querySelector("div").textContent = transmission;
+        carCO2RatingBox.querySelector("div").textContent = CO2Rating;
+        
 }

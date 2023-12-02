@@ -11,6 +11,7 @@
 :root{
     --background: #FAFAFA;
     --accent: #5408b1;
+    --accent: #222;
     --faint: #FAF6EE;
 }
 
@@ -37,9 +38,9 @@ body {
 .image-view > img {
     position: absolute;
     /* border: 5px solid blue; */
+    height: 100%;
     object-fit: fill;
     width: calc(100vw - 500px);
-    bottom: -100px;
 }
 
 .user-credentials-view {
@@ -59,16 +60,20 @@ body {
     transition: 1s;
 }
 
-.logo{
+.nav-bar{
     width: 100%;
     display: grid;
     grid-template-columns: 1fr auto;
 }
 
-.logo > img {
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
+.logos{
+    width: 100%;
+    display: grid;
+    grid-gap: 20px;
+}
+
+.logos > img {
+    height: 50px;
 }
 
 .user-actions {

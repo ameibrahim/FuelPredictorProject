@@ -2,6 +2,9 @@ let suggestionsView = document.querySelector(".suggestions");
 let startLocationName = ""
 let endLocationName = ""
 
+let startInputBox = document.querySelector(".start-input-location")
+let endInputBox = document.querySelector(".end-input-location")
+
 let newID = crypto.randomUUID();
 mapboxgl.accessToken = 'pk.eyJ1IjoiaWJyYWhpbWFtZTEzIiwiYSI6ImNsb2xlaDUxbDJlcXYya3A5bzZoZWc5MzkifQ.YyKfquv1mvX7xrUj5oG1Ow';
 
@@ -12,21 +15,22 @@ const map = new mapboxgl.Map({
     zoom: 9, // starting zoom
 });
 
-let source = [33.321258, 35.212448];
+let source;
 let destination;
 
 async function getRoute(start, end) {
-
 
 const query = await fetch(
 `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
 { method: 'GET' }
 );
 
-const json = await query.json();
-const data = json.routes[0];
-console.log("distance: ", data.distance);
-const route = data.geometry.coordinates;
+    const json = await query.json();
+    const data = json.routes[0];
+    console.log("distance: ", data.distance);
+    const route = data.geometry.coordinates;
+
+    setDistance(data.distance);
 
 const geojson = {
     type: 'Feature',
@@ -67,78 +71,135 @@ paint: {
 }
 
 
-async function giveSuggestions(value) {
+async function giveSuggestions(element) {
 
-console.log(value);
+    let value = element.value
 
-showSuggestionsView();
-
-const query = await fetch(
-    `https://api.mapbox.com/search/searchbox/v1/suggest?q=${value}&limit=3&session_token=${newID}&access_token=${mapboxgl.accessToken}`,
-    { method: 'GET' }
-);
-
-const json = await query.json();
-
-suggestionsView.innerHTML = "";
-
-if(json.suggestions){
-    json.suggestions.forEach( result => {
-        populateList(result.name);
-    });
-}
-
-function populateList(value) {
-    
-    let element = document.createElement('div');
-    console.log("value: ",value);
-    element.textContent = value;
-    element.className = "suggestion-row";
-
-    element.addEventListener('click', () => setSourceTo(value));
-
-    suggestionsView.appendChild(element);
-
-}
-
-async function setSourceTo(value){
-    startLocationName = value;
-    
-    let searchArea = document.querySelector(".search-area");
-    let inputBox = searchArea.querySelector("input");
-
-    inputBox.value = value;
+    showSuggestionsView();
 
     const query = await fetch(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${mapboxgl.accessToken}`,
+        `https://api.mapbox.com/search/searchbox/v1/suggest?q=${value}&limit=3&session_token=${newID}&access_token=${mapboxgl.accessToken}`,
         { method: 'GET' }
     );
 
     const json = await query.json();
 
-    if(json){
-        console.log(json)
-        console.log("[lat, long]: ", json.features[0].center);
+    suggestionsView.innerHTML = "";
 
-        let result = json.features[0].center;
+    if (element.className == "start-input-location"){
+        if(json.suggestions){
+            json.suggestions.forEach( result => {
+                populateList(result.name, setSourceTo);
+            });
+        }
 
-        getRoute(source, result);
+        // store source lang lat
+
+    }
+    else if(element.className == "end-input-location"){
+        if(json.suggestions){
+            json.suggestions.forEach( result => {
+                populateList(result.name, setEndTo);
+            });
+        }
     }
 
-    hideSuggestionsView();
+    function populateList(value, evenListenerCallback) {
+        
+        let element = document.createElement('div');
+        console.log("value: ",value);
+        element.textContent = value;
+        element.className = "suggestion-row";
+
+        element.addEventListener('click', () => { evenListenerCallback(value); hideSuggestionsView() });
+
+        suggestionsView.appendChild(element);
+
+    }
+
+    async function setSourceTo(value){
+
+        startLocationName = value;
+        console.log("babe: ", value);
+        startInputBox.value = value;
+
+        document.querySelector(".start-route-box").textContent = value;
+
+        const query = await fetch(
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${mapboxgl.accessToken}`,
+            { method: 'GET' }
+        );
+
+        const json = await query.json();
+
+        if(json){
+            console.log(json)
+            console.log("[lat, long]: ", json.features[0].center);
+            let result = json.features[0].center;
+            source = result;
+
+            // getRoute(source, result);
+        }
+
+        // hideSuggestionsView();
+    }
+
+    async function setEndTo(value){
+
+        endLocationName = value;
+        endInputBox.value = value;
+        document.querySelector(".end-route-box").textContent = value;
+
+        const query = await fetch(
+            `https://api.mapbox.com/geocoding/v5/mapbox.places/${value}.json?access_token=${mapboxgl.accessToken}`,
+            { method: 'GET' }
+        );
+
+        const json = await query.json();
+
+        if(json){
+            console.log(json)
+            console.log("[lat, long]: ", json.features[0].center);
+            let result = json.features[0].center;
+            destination = result;
+            // getRoute(source, result);
+        }
+
+        // hideSuggestionsView();
+    }
+
+
+    function showSuggestionsView(){
+        suggestionsView.style.display = "grid"
+    }
+
+    function hideSuggestionsView(){
+        suggestionsView.style.display = "none"
+    }
+
 }
 
-function setDestinationTo(value){
-    endLocationName = value;
-}
 
+function setDistance(distance){
+    let distanceBox = document.querySelector(".distance-box");
+    let roundedDistance = Math.round(distance / 1000 * 100) / 100 ;
 
-function showSuggestionsView(){
-    suggestionsView.style.display = "grid"
-}
+    distanceBox.querySelector("b").textContent = roundedDistance;
 
-function hideSuggestionsView(){
-    suggestionsView.style.display = "none"
-}
+    let {
+        fuel,
+        co2
+    } = APIResults;
+
+    let fuelResult = (fuel * roundedDistance) / 100;
+    fuelResult = Math.round(fuelResult * 100) / 100;
+
+    let co2Result = co2 * roundedDistance;
+    co2Result = Math.round(roundedDistance * 100);
+
+    let litresBox = document.querySelector(".litres-box");
+    let gramsBox = document.querySelector(".grams-box");
+    litresBox.querySelector("b").textContent = fuelResult;
+    gramsBox.querySelector("b").textContent = co2Result;
 
 }
