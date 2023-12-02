@@ -12,13 +12,42 @@ const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v12', // style URL
     center: [33.321258,35.212448], // starting position [lng, lat]
-    zoom: 9, // starting zoom
+    // pitch: 60,
+    // bearing: -60,
+    zoom: 10
 });
 
 let source;
 let destination;
+let startMarker;
+let endMarker;
 
 async function getRoute(start, end) {
+
+    if(startMarker) startMarker.remove()
+    if(endMarker) endMarker.remove()
+    // Set marker options.
+endMarker = new mapboxgl.Marker({
+    color: "#FFFFFF",
+    draggable: true
+    })
+    .setLngLat(end)
+    .setPopup(new mapboxgl.Popup().setHTML("<h1>Destination</h1>"))
+    .addTo(map);
+
+startMarker = new mapboxgl.Marker({
+    color: "var(--accent)",
+    draggable: true
+    })
+    .setLngLat(start)
+    .setPopup(new mapboxgl.Popup().setHTML("<h1>Destination</h1>"))
+    .addTo(map);
+
+    const bbox = [start, end];
+    map.fitBounds(bbox, {
+    padding: {top: 200, bottom: 300, left: 150, right: 150},
+    duration: 2000,
+    });
 
 const query = await fetch(
 `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
@@ -26,7 +55,10 @@ const query = await fetch(
 );
 
     const json = await query.json();
+    const routes = json.routes;
+    console.log("routes: ",routes);
     const data = json.routes[0];
+    console.log("data: ", data.duration /* in seconds */);
     console.log("distance: ", data.distance);
     const route = data.geometry.coordinates;
 
