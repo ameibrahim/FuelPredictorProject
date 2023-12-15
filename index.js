@@ -272,6 +272,21 @@ function getCarDetails() {
     let CO2Rating = CO2RatingInput.value;
     let fuelType = fuelTypeInput.getAttribute("data-value");
 
+    switch (fuelType) {
+        case "Diesel":
+            fuelType = "D";
+        break;
+        case "Ethanol":
+            fuelType = "E";
+        break;
+        case "Regular Gasoline":
+            fuelType = "X";
+        break;
+        case "Premium Gasoline":
+            fuelType = "Z";
+        break;
+    }
+
 
     // checkEmptyInputs();
 
@@ -438,7 +453,25 @@ function setSidePaneValues(carArray, results){
         carVehicleClassBox.querySelector("div").textContent = vehicleClass;
         carEngineBox.querySelector("div").textContent = engineSize;
         carCylinderBox.querySelector("div").textContent = cylinders;
-        carFuelTypeBox.querySelector("div").textContent = fuelType;
+
+        let _fuelType;
+
+        switch (fuelType) {
+            case "D":
+                _fuelType = "Diesel";
+            break;
+            case "E":
+                _fuelType = "Ethanol";
+            break;
+            case "X":
+                _fuelType = "Regular Gasoline";
+            break;
+            case "Z":
+                _fuelType = "Premium Gasoline";
+            break;
+        }
+
+        carFuelTypeBox.querySelector("div").textContent = _fuelType;
         carTransmissionBox.querySelector("div").textContent = transmission;
         carCO2RatingBox.querySelector("div").textContent = CO2Rating;
         

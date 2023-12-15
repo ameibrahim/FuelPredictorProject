@@ -8,9 +8,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Predictor</title>
-    <link rel="stylesheet" href="assets/css/main.css?10">
-    <link rel="stylesheet" href="assets/css/dashboard.css?5">
-    <link rel="stylesheet" href="assets/css/sidepane.css?5">
+    <link rel="stylesheet" href="assets/css/main.css?11">
+    <link rel="stylesheet" href="assets/css/dashboard.css?6">
+    <link rel="stylesheet" href="assets/css/sidepane.css?6">
 
     <link rel="stylesheet" href="assets/css/spinkit.css?3">
     <link rel="stylesheet" href="assets/css/mapview.css?4">
@@ -26,11 +26,11 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
 
-    <script src="map.js?8" defer></script>
+    <script src="map.js?13" defer></script>
     <script src="assets/js/dropdown.js?2" defer></script>
     <script src="assets/js/range.js?2" defer></script>
-    <script src="assets/js/carPredictionAPI.js?2" defer></script>
-    <script src="index.js?21" defer></script>
+    <script src="assets/js/carPredictionAPI.js?3" defer></script>
+    <script src="index.js?22" defer></script>
 
     <?php 
         echo "<script> 

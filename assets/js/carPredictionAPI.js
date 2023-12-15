@@ -59,13 +59,18 @@ async function predictWithObject(carIndexedDetailsObject){
         Z
     } = carIndexedDetailsObject
     
-    let url = `http://127.0.0.1:5000/get-results/?vehicleClass=${vehicleClass}&engineSize=${engineSize}&cylinders=${cylinders}&transmission=${transmission}&CO2Rating=${CO2Rating}&D=${D}&E=${E}&X=${X}&Z=${Z}`
+    let url = `http://ame.megamindame.com:5000/get-results/?vehicleClass=${vehicleClass}&engineSize=${engineSize}&cylinders=${cylinders}&transmission=${transmission}&CO2Rating=${CO2Rating}&D=${D}&E=${E}&X=${X}&Z=${Z}`
     
     try {
         let result = await fetch(url, { method: 'GET' });
         let JSONResult = await result.json();
         let fuel = JSONResult.fuel_result
         let co2 = JSONResult.CO2_result
+
+        console.log({
+            fuel,
+            co2
+        })
 
         return {
             fuel,

@@ -67,9 +67,9 @@
                 </div>
 
                 <div class="range-input-box">
-                    <label for="">CO2 Rating</label>
+                    <label for="">CO2 Rating (1 being worst and 10 being best)</label>
                     <div class='range' onchange="bindValue(this)">
-                        <input id="co2-rating-input" type="range" min='0' max='16' step='0.1' value="0" />
+                        <input id="co2-rating-input" type="range" min='0' max='10' step='0.1' value="0" />
                         <span>0</span>
                     </div>
                 </div>
@@ -78,10 +78,10 @@
                     <label for="">Fuel Type</label>
                     <div class="dropdown" id="fuel-type-input" data-value="Choose Fuel Type" data-empty="true">
                         <ul class="values">
-                            <li>D</li>
-                            <li>E</li>
-                            <li>X</li>
-                            <li>Z</li>
+                            <li>Diesel</li>
+                            <li>Ethanol</li>
+                            <li>Regular Gasoline</li>
+                            <li>Premium Gasoline</li>
                         </ul>
                     </div>
                 </div>

@@ -12,8 +12,8 @@ const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/mapbox/streets-v12', // style URL
     center: [33.321258,35.212448], // starting position [lng, lat]
-    // pitch: 60,
-    // bearing: -60,
+    pitch: 60,
+    bearing: -60,
     zoom: 10
 });
 
@@ -234,4 +234,70 @@ function setDistance(distance){
     litresBox.querySelector("b").textContent = fuelResult;
     gramsBox.querySelector("b").textContent = co2Result;
 
+    let fuelPrice = getFuelPrice(fuelResult);
+    let electicityCost = setEVDetails(roundedDistance);
+
+    let fuelPriceBox = document.querySelector(".fuel-price-box");
+    fuelPriceBox.querySelector("b").textContent = fuelPrice;
+
+    let savingsResult = fuelPrice - electicityCost;
+    savingsResult = Math.round((fuelPrice - electicityCost) * 100) / 100;
+
+    let savingsBox = document.querySelector(".savings-box");
+    savingsBox.querySelector("b").textContent = savingsResult;
+
+    // What if the fuelPrice is less than the electic cost. 
+    // What if it comes back negative
+
+}
+
+function getFuelPrice(fuelInLitres) {
+
+    let fuelPriceDifferentiator = document.querySelector(".fuel-price-differentiator");
+    let carFuelTypeBox = document.querySelector(".car-fuel-type-box");
+    let fuelType = carFuelTypeBox.querySelector("div").textContent;
+    let costPrice;
+
+    fuelPriceDifferentiator.textContent = `Fuel Price For ${fuelType}`;
+
+    switch (fuelType){
+        case "Diesel":
+            costPrice = 39.06;
+        break;
+        case "Ethanol":
+            costPrice = 34.91;
+        break;
+        case "Regular Gasoline":
+            costPrice = 34.55;
+        break;
+        case "Premium Gasoline":
+            costPrice = 36.86;
+        break;
+    }
+
+    return Math.round(fuelInLitres * costPrice * 100) / 100;
+
+}
+
+function getElectricityCost(electicityUse) {
+    return Math.round(electicityUse * 9.48 * 100) / 100;
+}
+
+function calculateElectricityUse(distance){
+    return Math.round(distance * 0.14 * 100) / 100;
+
+}
+
+function setEVDetails(distance){
+
+    let electicityUse = calculateElectricityUse(distance);
+    let electricityCost = getElectricityCost(electicityUse);
+
+    let electicityUseBox = document.querySelector(".electicity-use-box");
+    let electicityCostBox = document.querySelector(".electricity-cost-box");
+
+    electicityUseBox.querySelector("b").textContent = electicityUse;
+    electicityCostBox.querySelector("b").textContent = electricityCost;
+
+    return electricityCost;
 }

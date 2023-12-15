@@ -58,3 +58,8 @@
     --sk-color: #ffffff;
     --sk-size: 13px;
 }
+
+.simple-grid{
+    display: grid;
+    grid-gap: 20px;
+}
