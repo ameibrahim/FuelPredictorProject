@@ -78,6 +78,8 @@ async function predictWithObject(carIndexedDetailsObject){
         }
     }
     catch(error){
+
+        console.log("Error: ", error)
         return {
             fuel: "Error",
             co2: "Error"

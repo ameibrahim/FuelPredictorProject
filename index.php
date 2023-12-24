@@ -26,10 +26,10 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
 
-    <script src="map.js?15" defer></script>
+    <script src="map.js?16" defer></script>
     <script src="assets/js/dropdown.js?2" defer></script>
     <script src="assets/js/range.js?2" defer></script>
-    <script src="assets/js/carPredictionAPI.js?3" defer></script>
+    <script src="assets/js/carPredictionAPI.js?5" defer></script>
     <script src="index.js?23" defer></script>
 
     <?php 
