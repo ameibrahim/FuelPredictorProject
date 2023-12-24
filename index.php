@@ -30,7 +30,7 @@
     <script src="assets/js/dropdown.js?2" defer></script>
     <script src="assets/js/range.js?2" defer></script>
     <script src="assets/js/carPredictionAPI.js?3" defer></script>
-    <script src="index.js?22" defer></script>
+    <script src="index.js?23" defer></script>
 
     <?php 
         echo "<script> 

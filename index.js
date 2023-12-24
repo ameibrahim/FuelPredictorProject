@@ -350,14 +350,27 @@ async function getAvailableCars(){
         
         if (cars.length > 0) {
 
-            let innerHTML = cars.map( car => 
-                `<div class="car-item">
-                    <h1>${car.carName}</h1>
-                    <div class="button" onclick="predictWithID(${car.id})">Predict</div>
-                </div>`
+            cars.forEach( car => {
+
+                    let carElement = document.createElement("div");
+                    carElement.className = "car-item"
+                    
+                    let carTitle = document.createElement("div");
+                    carTitle.textContent = car.carName;
+        
+                    let carButton = document.createElement("div");
+                    carButton.textContent = "Predict";
+                    carButton.className = "button"
+                    carButton.addEventListener("click", () => {
+                        predictWithID(car.id)
+                    })
+
+                    carElement.appendChild(carTitle)
+                    carElement.appendChild(carButton)
+                    carListContainer.appendChild(carElement);
+                }
+
             )
-    
-            carListContainer.innerHTML = innerHTML.join("");
         }
         else {
             carListContainer.innerHTML = 

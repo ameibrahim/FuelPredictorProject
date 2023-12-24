@@ -39,6 +39,8 @@
     grid-gap: 20px;
     place-items: center;
     min-height: 200px;
+    padding: 30px;
+    text-align: center;
 }
 
 .car-item h1 { font-weight: 400; }
