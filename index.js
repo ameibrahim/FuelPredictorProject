@@ -20,7 +20,7 @@ let fuelTypeInput = carOverlay.querySelector("#fuel-type-input");
 
 let APIResults = { };
 
-if(USERNAME != ""){
+if(USERNAME != "" && userID != null){
     showUsername(USERNAME);
     maximize();
     getAvailableCars();
@@ -360,10 +360,8 @@ async function getAvailableCars(){
         
                     let carButton = document.createElement("div");
                     carButton.textContent = "Predict";
-                    carButton.className = "button"
-                    carButton.addEventListener("click", () => {
-                        predictWithID(car.id)
-                    })
+                    carButton.className = "button";
+                    carButton.addEventListener("click", () => predictWithID(car.id));
 
                     carElement.appendChild(carTitle)
                     carElement.appendChild(carButton)

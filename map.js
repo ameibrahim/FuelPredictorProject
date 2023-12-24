@@ -227,7 +227,7 @@ function setDistance(distance){
     fuelResult = Math.round(fuelResult * 100) / 100;
 
     let co2Result = co2 * roundedDistance;
-    co2Result = Math.round(co2Result * 100);
+    co2Result = Math.round(co2Result * 100) / 100;
 
     let litresBox = document.querySelector(".litres-box");
     let gramsBox = document.querySelector(".grams-box");
