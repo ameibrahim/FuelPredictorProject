@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Predictor</title>
     <link rel="stylesheet" href="assets/css/main.css?12">
-    <link rel="stylesheet" href="assets/css/dashboard.css?9">
+    <link rel="stylesheet" href="assets/css/dashboard.css?10">
     <link rel="stylesheet" href="assets/css/sidepane.css?7">
 
     <link rel="stylesheet" href="assets/css/spinkit.css?3">
-    <link rel="stylesheet" href="assets/css/mapview.css?4">
+    <link rel="stylesheet" href="assets/css/mapview.css?5">
     <link rel="stylesheet" href="assets/css/popup.css?1">
     <link rel="stylesheet" href="assets/css/dropdown.css?2">
     <link rel="stylesheet" href="assets/css/range.css?2">
@@ -22,7 +22,7 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
 
-    <script src="map.js?17" defer></script>
+    <script src="map.js?18" defer></script>
     <script src="assets/js/dropdown.js?3" defer></script>
     <script src="assets/js/range.js?3" defer></script>
     <script src="assets/js/carPredictionAPI.js?6" defer></script>

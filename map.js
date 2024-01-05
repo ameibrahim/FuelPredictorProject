@@ -5,6 +5,20 @@ let endLocationName = ""
 let startInputBox = document.querySelector(".start-input-location")
 let endInputBox = document.querySelector(".end-input-location")
 
+function resetMapView(){
+
+    try {
+        startInputBox.value = "";
+        endInputBox.value = "";
+    
+        if(startMarker) startMarker.remove()
+        if(endMarker) endMarker.remove()
+        if(routeLayer) map.removeLayer("route");
+    }
+    catch(error){
+        console.log(error)
+    }
+}
 let newID = generateUUID();
 mapboxgl.accessToken = 'pk.eyJ1IjoiaWJyYWhpbWFtZTEzIiwiYSI6ImNsb2xlaDUxbDJlcXYya3A5bzZoZWc5MzkifQ.YyKfquv1mvX7xrUj5oG1Ow';
 
@@ -27,7 +41,8 @@ async function getRoute(start, end) {
     if(startMarker) startMarker.remove()
     if(endMarker) endMarker.remove()
     // Set marker options.
-endMarker = new mapboxgl.Marker({
+
+    endMarker = new mapboxgl.Marker({
     color: "#FFFFFF",
     draggable: true
     })
@@ -35,7 +50,7 @@ endMarker = new mapboxgl.Marker({
     .setPopup(new mapboxgl.Popup().setHTML("<h1>Destination</h1>"))
     .addTo(map);
 
-startMarker = new mapboxgl.Marker({
+    startMarker = new mapboxgl.Marker({
     color: "var(--accent)",
     draggable: true
     })
@@ -49,10 +64,10 @@ startMarker = new mapboxgl.Marker({
     duration: 2000,
     });
 
-const query = await fetch(
-`https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
-{ method: 'GET' }
-);
+    const query = await fetch(
+    `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+    { method: 'GET' }
+    );
 
     const json = await query.json();
     const routes = json.routes;
@@ -61,41 +76,40 @@ const query = await fetch(
 
     setDistance(data.distance);
 
-const geojson = {
-    type: 'Feature',
-    properties: {},
-    geometry: {
-    type: 'LineString',
-    coordinates: route
+    const geojson = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+        type: 'LineString',
+        coordinates: route
+        }
+    };
+
+    // if the route already exists on the map, we'll reset it using setData
+    if (map.getSource('route')) {
+        map.getSource('route').setData(geojson);
     }
-};
-
-
-// if the route already exists on the map, we'll reset it using setData
-if (map.getSource('route')) {
-map.getSource('route').setData(geojson);
-}
-// otherwise, we'll make a new request
-else {
-map.addLayer({
-id: 'route',
-type: 'line',
-source: {
-    type: 'geojson',
-    data: geojson
-},
-layout: {
-    'line-join': 'round',
-    'line-cap': 'round'
-},
-paint: {
-    'line-color': '#ff0000',
-    'line-width': 5,
-    'line-opacity': 0.75
-}
-});
-}
-// add turn instructions here at the end
+    // otherwise, we'll make a new request
+    else {
+        routeLayer = map.addLayer({
+            id: 'route',
+            type: 'line',
+            source: {
+                type: 'geojson',
+                data: geojson
+            },
+            layout: {
+                'line-join': 'round',
+                'line-cap': 'round'
+            },
+            paint: {
+                'line-color': '#ff0000',
+                'line-width': 5,
+                'line-opacity': 0.75
+            }
+        });
+    }
+    // add turn instructions here at the end
 }
 
 

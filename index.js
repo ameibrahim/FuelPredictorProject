@@ -376,6 +376,8 @@ async function getAvailableCars(id){
 
 async function predictWithID(givenID){
 
+    resetMapView();
+
     mapView.style.left = "0vw";
     viewContainer.style.left = "-100vw";
 
