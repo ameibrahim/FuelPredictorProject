@@ -20,10 +20,10 @@ let fuelTypeInput = carOverlay.querySelector("#fuel-type-input");
 
 let APIResults = { };
 
-if(USERNAME != "" && userID != null){
+if(USERNAME != "" && userID >= 0){
     showUsername(USERNAME);
     maximize();
-    getAvailableCars();
+    getAvailableCars(userID);
 }
 
 function AJAXCall(callObject){
@@ -87,11 +87,10 @@ async function logout(){
     }
 
     try {
-        let result = await AJAXCall(callObject);
-        console.log(result);
+        await AJAXCall(callObject);
     }
     catch(error){
-        console.log(error);
+
     }
 
 
@@ -168,12 +167,10 @@ async function login() {
 
         let result = await AJAXCall(callObject)
 
-        console.log(result);
-
-        if( result == "success" ){
+        if( result ){
             setTimeout(() => {
                 maximize();
-                getAvailableCars();
+                getAvailableCars(result);
                 showUsername(username);
                 buttonText.style.display = "block";
                 loginLoader.style.display = "none";
@@ -189,7 +186,6 @@ async function login() {
 
     }
     catch(error){
-        console.log((error));
     }
 
 }
@@ -218,21 +214,16 @@ async function addCar(element){
     let details = getCarDetails();
     
     try {
-        console.log(details);
-        let result = await sendCarDetails(details);
-        console.log("result: ", result);
-
-        //TODO: resetFormAndLoadingButton()
+        await sendCarDetails(details);
     }
     catch(error){
-        console.log(error);
     }
 
     setTimeout(() => {
         text.style.display = "none";
         buttonLoader.style.display = "flex";
         closeAddCarOverlay();
-        getAvailableCars();
+        getAvailableCars(userID);
         // refreshDashboard();
     }, 3000);
 }
@@ -334,9 +325,9 @@ async function sendCarDetails(details){
     return await AJAXCall(callObject);
 }
 
-async function getAvailableCars(){
+async function getAvailableCars(id){
 
-    let params = `userID=${userID}`;
+    let params = `userID=${id}`;
 
     let callObject = {
         phpFilePath: "include/cars.fetch.php",
@@ -350,10 +341,13 @@ async function getAvailableCars(){
         
         if (cars.length > 0) {
 
+            carListContainer.innerHTML = "";
+
             cars.forEach( car => {
 
                     let carElement = document.createElement("div");
                     carElement.className = "car-item"
+                    carElement.addEventListener("click", () => predictWithID(car.id));
                     
                     let carTitle = document.createElement("div");
                     carTitle.textContent = car.carName;
@@ -376,7 +370,7 @@ async function getAvailableCars(){
         }
     }
     catch(error){
-        console.log(error);
+        
     }
 }
 
@@ -402,10 +396,8 @@ async function predictWithID(givenID){
         // }
         
         let indexesArray = convertToArrayOfIndexes(carArray);
-        console.log("indexesArray: ", indexesArray)
         let results = await predictWithObject(indexesArray);
         setSidePaneValues(carArray, results);
-        console.log("results: ", results);
 
         // Make sure server is on...
         // setResultsGlobally
@@ -414,7 +406,6 @@ async function predictWithID(givenID){
 
     }
     catch(error){
-        console.log(error)
     }
 
 }
@@ -434,7 +425,6 @@ async function fetchDetailsFor(givenID){
         return await AJAXCall(callObject);
     }
     catch(error){
-        console.log(error);
     }
 }
 

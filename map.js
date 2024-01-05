@@ -56,10 +56,7 @@ const query = await fetch(
 
     const json = await query.json();
     const routes = json.routes;
-    console.log("routes: ",routes);
     const data = json.routes[0];
-    console.log("data: ", data.duration /* in seconds */);
-    console.log("distance: ", data.distance);
     const route = data.geometry.coordinates;
 
     setDistance(data.distance);
@@ -73,7 +70,6 @@ const geojson = {
     }
 };
 
-console.log(geojson);
 
 // if the route already exists on the map, we'll reset it using setData
 if (map.getSource('route')) {
@@ -139,7 +135,6 @@ async function giveSuggestions(element) {
     function populateList(value, evenListenerCallback) {
         
         let element = document.createElement('div');
-        console.log("value: ",value);
         element.textContent = value;
         element.className = "suggestion-row";
 
@@ -152,7 +147,6 @@ async function giveSuggestions(element) {
     async function setSourceTo(value){
 
         startLocationName = value;
-        console.log("babe: ", value);
         startInputBox.value = value;
 
         document.querySelector(".start-route-box").textContent = value;
@@ -165,8 +159,6 @@ async function giveSuggestions(element) {
         const json = await query.json();
 
         if(json){
-            console.log(json)
-            console.log("[lat, long]: ", json.features[0].center);
             let result = json.features[0].center;
             source = result;
 
@@ -190,8 +182,6 @@ async function giveSuggestions(element) {
         const json = await query.json();
 
         if(json){
-            console.log(json)
-            console.log("[lat, long]: ", json.features[0].center);
             let result = json.features[0].center;
             destination = result;
             // getRoute(source, result);

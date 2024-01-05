@@ -25,7 +25,7 @@ if(mysqli_num_rows($result) == 1){ //sizeof row
     $_SESSION['id'] = $row[0];
     $_SESSION['username'] = $row[1];
 
-    echo 'success';
+    echo $row[0];
 
 }
 else {

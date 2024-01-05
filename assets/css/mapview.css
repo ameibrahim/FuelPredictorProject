@@ -29,7 +29,6 @@
 }
 
 .map-view{
-    background: green;
     display: grid;
     height: 100%;
     position: relative;

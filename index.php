@@ -1,16 +1,12 @@
-<?php
-  session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fuel Predictor</title>
-    <link rel="stylesheet" href="assets/css/main.css?11">
-    <link rel="stylesheet" href="assets/css/dashboard.css?6">
-    <link rel="stylesheet" href="assets/css/sidepane.css?6">
+    <link rel="stylesheet" href="assets/css/main.css?12">
+    <link rel="stylesheet" href="assets/css/dashboard.css?9">
+    <link rel="stylesheet" href="assets/css/sidepane.css?7">
 
     <link rel="stylesheet" href="assets/css/spinkit.css?3">
     <link rel="stylesheet" href="assets/css/mapview.css?4">
@@ -30,14 +26,18 @@
     <script src="assets/js/dropdown.js?3" defer></script>
     <script src="assets/js/range.js?3" defer></script>
     <script src="assets/js/carPredictionAPI.js?6" defer></script>
-    <script src="index.js?24" defer></script>
+    <script src="index.js?27" defer></script>
 
     <?php 
+    
+        session_start();
+
         echo "<script> 
             const USERNAME = '".$_SESSION['username']."';
             const userID = '".$_SESSION['id']."';
         </script>";
     ?>
+    
 </head>
 <body>
     
@@ -54,7 +54,7 @@
             </div>
 
             <div class="user-actions">
-                <div class="username">Mahmoud</div>
+                <div class="username"></div>
                 <div class="logout-icon" onclick="logout()">
                     <img src="assets/icons/exit.png" alt="">
                 </div>

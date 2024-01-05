@@ -1,13 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 *,
 *::after,
 *::before {
     margin: 0 0;
     padding: 0 0;
     box-sizing: border-box;
-    font-family: Avenir Next;
+    font-family: 'Montserrat', sans-serif;
     list-style: none;
 }
-
 :root{
     --background: #FAFAFA;
     --accent: #5408b1;
@@ -17,7 +17,6 @@
 
 body {
     display: grid;
-    /* grid-template-columns: 1fr 500px; */
     position: relative;
     height: 100vh;
     width: 100vw;
@@ -27,7 +26,6 @@ body {
 .image-view {
     position: absolute;
     display: grid;
-    /* border: 10px solid red; */
     overflow: hidden;
     height: 100%;
     width: 100%;
@@ -37,7 +35,6 @@ body {
 
 .image-view > img {
     position: absolute;
-    /* border: 5px solid blue; */
     height: 100%;
     object-fit: fill;
     width: calc(100vw - 500px);
@@ -118,8 +115,17 @@ body {
     border-radius: 30px;
     cursor: pointer;
     align-self: center;
+    transition: 0.5s all;
+
+    user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -webkit-user-select: none;
 }
 .container .button { place-self: end; }
+.button:hover{
+    transform: scale(0.90);
+}
 
 .heading {
     display: grid;

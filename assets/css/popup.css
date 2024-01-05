@@ -1,7 +1,6 @@
 .popup {
     position: relative;
     box-shadow: var(--boxshadowD);
-    /* overflow: hidden; */
     display: grid;
     grid-template-columns: 1fr;
     place-items: center;
